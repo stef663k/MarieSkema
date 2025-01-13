@@ -1,0 +1,36 @@
+@model MarieSkema.Models.Fag
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Fag</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FagNavn)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FagNavn)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FagTid)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FagTid)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TPTid)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TPTid)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.FagId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

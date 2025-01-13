@@ -1,0 +1,47 @@
+@model IEnumerable<MarieSkema.Models.Fag>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FagNavn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FagTid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TPTid)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FagNavn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FagTid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TPTid)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.FagId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.FagId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.FagId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
