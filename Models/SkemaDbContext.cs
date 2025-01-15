@@ -31,6 +31,12 @@ public class SkemaDbContext : DbContext
             .WithMany(l => l.FagsDages)
             .HasForeignKey(fd => fd.LaererId);       
 
+        builder.Entity<FagDage>()
+            .Property(f => f.Dag)
+            .HasConversion(
+                v => v.ToString(),      
+                v => (Dage)Enum.Parse(typeof(Dage), v)  
+            );
     }
    
 }

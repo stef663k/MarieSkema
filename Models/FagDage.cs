@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,11 +11,14 @@ public enum Dage{
     Tirsdag,
     Onsdag,
     Torsdag,
-    Fredag
+    Fredag,
+    Lørdag,
+    Søndag
 } 
 public class FagDage
 {
     public int FagDageId { get; set; }
+    [Column(TypeName = "nvarchar(50)")]
     public Dage Dag { get; set; }
     public DateTime dateTime{ get; set; }
 

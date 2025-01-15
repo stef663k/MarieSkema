@@ -4,6 +4,7 @@ using MarieSkema.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarieSkema.Migrations
 {
     [DbContext(typeof(SkemaDbContext))]
-    partial class SkemaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250115124144_ConvertDageEnumToString")]
+    partial class ConvertDageEnumToString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

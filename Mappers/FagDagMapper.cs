@@ -23,7 +23,7 @@ public class FagDagMapper
         };
     }
 
-    public static FagDage fagDdagDTOPOSTMapper(FagDdagDTO dto)
+    public static FagDage fagDdagDTOPOSTMapper(FagDdagDTOPost dto)
     {
         return new FagDage
         {
