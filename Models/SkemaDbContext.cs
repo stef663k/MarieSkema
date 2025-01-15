@@ -21,20 +21,15 @@ public class SkemaDbContext : DbContext
     {
         base.OnModelCreating(builder);
 
-        builder.Entity<Fag>()
-            .HasMany(f => f.laererses)
-            .WithMany(f => f.fags)
-            .UsingEntity(j => j.ToTable("FagLaerer"));
+        builder.Entity<FagDage>()
+            .HasOne(fd => fd.Fag)
+            .WithMany(f => f.fagDageses)
+            .HasForeignKey(fd => fd.FagId);
 
-        builder.Entity<Fag>()
-            .HasMany(f => f.fagDageses)
-            .WithMany(d => d.fag)
-            .UsingEntity(j => j.ToTable("FagFagDage"));
-
-        builder.Entity<Laerer>()
-            .HasMany(l => l.fagsDage)
-            .WithMany(d => d.laerers)
-            .UsingEntity(j => j.ToTable("LaererFagDage"));        
+        builder.Entity<FagDage>()
+            .HasOne(fd => fd.Laerer)
+            .WithMany(l => l.FagsDages)
+            .HasForeignKey(fd => fd.LaererId);       
 
     }
    

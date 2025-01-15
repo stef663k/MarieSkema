@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MarieSkema")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3612d33263e25696432517bac8e82c5c9d88f7fe")]
 [assembly: System.Reflection.AssemblyProductAttribute("MarieSkema")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MarieSkema")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

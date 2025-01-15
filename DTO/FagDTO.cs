@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MarieSkema.Models;
+namespace MarieSkema.DTO;
 
-public class Fag
+public class FagDTO
 {
     public int FagId { get; set; }
     public string FagNavn{ get; set; }
     public float FagTid { get; set; }
     public Boolean TPTid { get; set; }
-
-    public ICollection<FagDage> fagDageses { get; set; } = new List<FagDage>();
+}
+public class FagDTOPost{
+    public string FagNavn{ get; set; }
+    public float FagTid{ get; set; }
+    public Boolean TPTid{ get; set; }
 }

@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MarieSkema.Models;
+using MarieSkema.Mappers;
+using MarieSkema.DTO;
 
 namespace MarieSkema.Controllers
 {
@@ -33,22 +35,38 @@ namespace MarieSkema.Controllers
                 return NotFound();
             }
 
-            return fag;
+            var fagDTO = FagMapper.GetFagDTO(fag);
+
+            return Ok(fagDTO);
         }
 
         // POST: api/Fag
         [HttpPost]
-        public async Task<ActionResult<Fag>> PostFag(Fag fag)
+        public async Task<ActionResult<Fag>> PostFag(FagDTOPost fagDTOPost)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+              
+            var fag = FagMapper.PostToFag(fagDTOPost);
             _context.Fag.Add(fag);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetFag), new { id = fag.FagId }, fag);
+            
+            try 
+            {
+                await _context.SaveChangesAsync();
+                var fagDTO = FagMapper.GetFagDTO(fag);
+                return CreatedAtAction(nameof(GetFag), new { id = fag.FagId }, fagDTO);
+            }
+            catch (DbUpdateException ex) 
+            {
+                if (ex.InnerException?.Message.Contains("unique constraint") ?? false)
+                {
+                    return Conflict("A similar record already exists");
+                }
+                
+                throw;
+            }
         }
 
         // PUT: api/Fag/5

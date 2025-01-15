@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MarieSkema.Models;
+using MarieSkema.Mappers;
+using MarieSkema.DTO;
 
 namespace MarieSkema.Controllers
 {
@@ -17,14 +19,15 @@ namespace MarieSkema.Controllers
 
         // GET: api/Laerer
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Laerer>>> GetLaerers()
+        public async Task<ActionResult<IEnumerable<LaererDTO>>> GetLaerers()
         {
-            return await _context.Laerer.ToListAsync();
+            var laerere = await _context.Laerer.ToListAsync();
+            return laerere.Select(l => LaererMapper.laererDTOMapper(l)).ToList();
         }
 
         // GET: api/Laerer/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Laerer>> GetLaerer(int id)
+        public async Task<ActionResult<LaererDTO>> GetLaerer(int id)
         {
             var laerer = await _context.Laerer.FindAsync(id);
 
@@ -33,33 +36,33 @@ namespace MarieSkema.Controllers
                 return NotFound();
             }
 
-            return laerer;
+            return LaererMapper.laererDTOMapper(laerer);
         }
 
         // POST: api/Laerer
         [HttpPost]
-        public async Task<ActionResult<Laerer>> PostLaerer(Laerer laerer)
+        public async Task<ActionResult<LaererDTO>> PostLaerer(LaererDTO laererDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+            var laerer = LaererMapper.LæarerPostMapper(laererDTO);
             _context.Laerer.Add(laerer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetLaerer), new { id = laerer.LaererId }, laerer);
+            return CreatedAtAction(
+                nameof(GetLaerer),
+                new { id = laerer.LaererId }, 
+                LaererMapper.laererDTOMapper(laerer));
         }
 
         // PUT: api/Laerer/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLaerer(int id, Laerer laerer)
+        public async Task<IActionResult> PutLaerer(int id, LaererDTO laererDTO)
         {
-            if (id != laerer.LaererId)
+            if (id != laererDTO.LaererId)
             {
                 return BadRequest();
             }
 
+            var laerer = LaererMapper.LæarerPostMapper(laererDTO);
             _context.Entry(laerer).State = EntityState.Modified;
 
             try
